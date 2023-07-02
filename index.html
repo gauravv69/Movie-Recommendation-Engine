@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Movie Recommender System</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f2f2f2;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            background-image: linear-gradient(to right, #8360c3, #2ebf91);
+        }
+
+        h1 {
+            font-family: "Josefin Sans", Arial, sans-serif;
+            font-size: 50px;
+            line-height: 1.3em;
+            color: #fff;
+            text-align: center;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            text-shadow: 0 0 5px #fff;
+        }
+
+        .search-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            transition: opacity 0.3s ease;
+        }
+
+        .search-button {
+            margin-top: 20px;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        select {
+            padding: 8px;
+            font-size: 16px;
+        }
+
+        button {
+            margin-left: 5px;
+            padding: 10px 20px;
+            font-size: 16px;
+            background-color: red;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+            border-radius: 25px;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+        }
+
+        button:hover {
+            background-color: #ff0000;
+        }
+
+        button:active {
+            transform: scale(0.95);
+        }
+    </style>
+    <script>
+        function showSearchButton() {
+            var searchContainer = document.getElementById("search-container");
+            var searchButton = document.getElementById("search-button");
+
+            searchContainer.style.opacity = 0;
+            searchButton.style.opacity = 1;
+            setTimeout(function () {
+                searchContainer.style.display = "none";
+                searchButton.style.display = "block";
+            }, 300);
+        }
+    </script>
+</head>
+<body>
+    <h1 style="font-family: 'Josefin Sans'">Movie Recommendation Engine</h1>
+    <div id="search-container">
+        <div onclick="showSearchButton()">Search for Movies</div>
+    </div>
+    <div id="search-button" style="display: none;">
+        <form method="POST" action="/">
+            <select name="selected_movie">
+                {% for movie in movie_list %}
+                    <option value="{{ movie }}">{{ movie }}</option>
+                {% endfor %}
+            </select>
+            <button type="submit">Show Recommendation</button>
+        </form>
+    </div>
+</body>
+</html>
